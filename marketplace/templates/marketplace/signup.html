@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - AutoVilla</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #181818; /* Dark background */
+            margin: 0;
+            padding: 0;
+            color: #f1f1f1; /* Light text for contrast */
+        }
+
+        .header {
+            background-image: url('https://via.placeholder.com/1920x300/3a3a3a/ffffff?text=Join+the+AutoVilla+Community'); /* Replace with relevant image */
+            background-size: cover;
+            text-align: center;
+            padding: 80px 20px;
+            color: white;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .signup-container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 40px;
+            background: #333; /* Dark background for form container */
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .signup-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #f1f1f1; /* Light text for title */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #555; /* Darker border for input fields */
+            border-radius: 5px;
+            background-color: #444; /* Dark input background */
+            color: #f1f1f1; /* Light text inside input fields */
+        }
+
+        input::placeholder {
+            color: #aaa; /* Placeholder text color */
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, #6b5b95, #feb47b);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%; /* Full width for button */
+        }
+
+        .submit-btn:hover {
+            background: #feb47b; /* Lighter shade on hover */
+        }
+
+        .footer-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #f1f1f1; /* Light text for footer */
+        }
+
+        .footer-link a {
+            color: #6b5b95; /* Accent color for link */
+            text-decoration: none;
+        }
+
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Create Your Account</h1>
+        <p>Join AutoVilla for an unrivaled vehicle experience!</p>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="signup-container">
+        <div class="signup-title">Sign Up</div>
+        <form id="signupForm">
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+
+        <div class="footer-link">
+            <p>Already have an account? <a href="/login">Log In</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+            
+            // Get values from the form fields
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Simple validation
+            if (password !== confirmPassword) {
+                alert('Passwords do not match. Please try again.');
+                return;
+            }
+
+            // Simulate a successful registration
+            alert(`Thank you for signing up, ${fullName}! Your account has been created.`);
+
+            // Reset the form
+            document.getElementById('signupForm').reset();
+        });
+    </script>
+</body>
+</html>

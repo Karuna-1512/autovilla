@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ vehicle.brand }} {{ vehicle.model_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* General styles for the vehicle card */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #f1f1f1; /* Light text color */
+            margin: 0;
+            padding: 0;
+        }
+.vehicle-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+}
+
+.vehicle-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.vehicle-details {
+    text-align: left;
+}
+
+.vehicle-details h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.vehicle-details p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="vehicle-card">
+        <img src="{{ vehicle.image.url }}" alt="{{ vehicle.title }}" class="vehicle-image">
+        <div class="vehicle-details">
+            <h1>{{ vehicle.title }}</h1>
+            <p><strong>Brand:</strong> {{ vehicle.brand }}</p>
+            <p><strong>Model:</strong> {{ vehicle.model_name }}</p>
+            <p><strong>Fuel Type:</strong> {{ vehicle.fuel_type }}</p>
+            <p><strong>Mileage:</strong> {{ vehicle.mileage }} km</p>
+            <p><strong>Description:</strong> {{ vehicle.description }}</p>
+            <p><strong>Price:</strong> ₹{{ vehicle.price }}</p>
+        </div>
+    </div>
+</body>
+</html>

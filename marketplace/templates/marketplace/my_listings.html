@@ -1,0 +1,12 @@
+{% extends 'marketplace/base.html' %}
+
+{% block content %}
+<h2>My Listings</h2>
+<ul>
+  {% for vehicle in vehicles %}
+    <li>{{ vehicle.brand }} {{ vehicle.model_name }} - ${{ vehicle.price }}</li>
+  {% empty %}
+    <li>No listings available at the moment. Please check back later!</li>
+  {% endfor %}
+</ul>
+{% endblock %}

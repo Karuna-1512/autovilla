@@ -1,0 +1,133 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}AutoVilla{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Header styles for Dark Mode */
+    .dark-mode-header {
+      background-color: #2d3748; /* Dark Gray */
+      color: #f6ad55; /* Orange Accent */
+    }
+
+    /* Styling for dark mode toggle button */
+    .dark-mode-toggle {
+      background-color: #f6ad55;
+      color: #2d3748;
+      padding: 5px 15px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    /* Centered Navigation Links */
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #f6ad55; /* Orange */
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ffffff; /* White on hover */
+    }
+
+    /* Light mode styles */
+    body {
+      background-color: rgb(29, 31, 32); /* Light Background for Light Mode */
+      color: #2d3748; /* Dark Text for Light Mode */
+    }
+
+    /* Dark mode styles with black background */
+    body.dark {
+      background-color: #000000; /* Black Background for Dark Mode */
+      color: #ffffff; /* White Text for Dark Mode */
+    }
+
+    /* Adjusting links for dark mode */
+    body.dark nav a {
+      color: #ffffff; /* White links in dark mode */
+    }
+
+    body.dark nav a:hover {
+      color: #f6ad55; /* Orange on hover in dark mode */
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200">
+
+  <!-- Navbar with Dark Header and Orange Accent -->
+  <header class="dark-mode-header p-4">
+    <div class="flex justify-between items-center">
+      <a href="/" class="text-3xl font-bold text-orange-500">AutoVilla</a>
+      <!-- Centered Navbar Links -->
+      <nav>
+        <a href="/about" class="mr-4">About</a>
+        <a href="/contact" class="mr-4">Contact</a>
+        <a href="/vehicles" class="mr-4">Vehicles</a>
+
+        {% if user.is_authenticated %}
+          <a href="/dashboard" class="mr-4">Dashboard</a>
+        {% else %}
+          <a href="/login" class="mr-4">Login</a>
+          <a href="/register" class="mr-4">Register</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+          <a href="/profile" class="mr-4">Profile</a>
+        {% endif %}
+        <a href="/logout" class="mr-4">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Dark Mode Toggle Button -->
+  <div class="fixed top-4 right-4 z-50">
+    <button id="darkToggle" class="dark-mode-toggle text-sm px-3 py-1 rounded shadow">
+      Dark 
+    </button> 
+  </div>
+
+  <!-- Page Content -->
+  <main style="padding: 20px;">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="dark:text-gray-400 text-center py-4">
+    &copy; 2025 AutoVilla. All rights reserved.
+  </footer>
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    // Get the root and dark mode toggle button
+    const toggle = document.getElementById("darkToggle");
+
+    // Check localStorage for theme preference and apply the theme
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+
+    // Event listener to toggle dark mode
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      // Save the current theme in localStorage
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    });
+  </script>
+
+</body>
+</html>

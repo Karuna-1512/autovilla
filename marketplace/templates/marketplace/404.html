@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 - Page Not Found | AutoVilla</title>
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .error-container {
+      max-width: 500px;
+      padding: 40px;
+      background-color: #fff;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      position: absolute;
+      top: 30px;
+      z-index: 2;
+    }
+
+    .error-code {
+      font-size: 120px;
+      font-weight: 900;
+      color: #10b981;
+      margin: 0;
+    }
+
+    .error-message {
+      font-size: 24px;
+      margin: 20px 0;
+      color: #333;
+    }
+
+    .home-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #10b981;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .home-link:hover {
+      background-color: #0ea775;
+    }
+
+    .sad-face {
+      font-size: 48px;
+      margin-top: -20px;
+      color: #999;
+    }
+
+    /* Game Area */
+    #game-area {
+      width: 100vw;
+      height: 100vh;
+      background-color: #f4f4f4;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .catcher {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      width: 60px;
+      height: 60px;
+      background-color: #10b981;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+
+    .falling-object {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      background-color: #ff6347;
+      border-radius: 50%;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { top: -50px; }
+      100% { top: 100vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <div class="error-code">404</div>
+    <div class="sad-face">😕</div>
+    <div class="error-message">Oops! The page you're looking for doesn’t exist.</div>
+    <a href="{% url 'home' %}" class="home-link">Back to Home</a>
+  </div>
+
+  <!-- Game Area -->
+  <div id="game-area">
+    <div class="catcher" id="catcher"></div>
+    <div class="falling-object" id="falling-object"></div>
+  </div>
+
+  <script>
+    let catcher = document.getElementById("catcher");
+    let gameArea = document.getElementById("game-area");
+
+    // Moving the catcher
+    let catcherPosition = gameArea.clientWidth / 2 - catcher.offsetWidth / 2;
+    document.addEventListener("mousemove", function(event) {
+      catcherPosition = event.clientX - catcher.offsetWidth / 2;
+      if (catcherPosition < 0) catcherPosition = 0;
+      if (catcherPosition > gameArea.clientWidth - catcher.offsetWidth) {
+        catcherPosition = gameArea.clientWidth - catcher.offsetWidth;
+      }
+      catcher.style.left = catcherPosition + "px";
+    });
+
+    // Create falling objects
+    function createFallingObject() {
+      let fallingObject = document.createElement("div");
+      fallingObject.classList.add("falling-object");
+      fallingObject.style.left = Math.random() * (gameArea.clientWidth - 30) + "px";
+      gameArea.appendChild(fallingObject);
+
+      // Animation for falling
+      fallingObject.addEventListener("animationiteration", function() {
+        fallingObject.style.left = Math.random() * (gameArea.clientWidth - 30) + "px";
+      });
+
+      setTimeout(() => {
+        gameArea.removeChild(fallingObject);
+      }, 3000); // Remove after 3 seconds
+    }
+
+    // Create a falling object every 1 second
+    setInterval(createFallingObject, 1000);
+  </script>
+</body>
+</html>

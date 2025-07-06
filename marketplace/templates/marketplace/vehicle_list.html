@@ -1,0 +1,24 @@
+{% load static %}
+<section class="vehicles-list">
+  <h2>Featured Vehicles</h2>
+  <div class="vehicles-container">
+    {% for vehicle in vehicles %}
+      <div class="vehicle-card">
+        <img src="{{ vehicle.image.url }}" alt="{{ vehicle.title }}">
+        <h3>{{ vehicle.title }}</h3>
+        <p class="description">{{ vehicle.description|truncatewords:20 }}</p>
+        <p class="price">${{ vehicle.price }}</p>
+        <a href="{% url 'vehicle_detail' vehicle_id=vehicle.id %}" class="view-details-btn">View Details</a>
+      </div>
+    {% empty %}
+      <p>No vehicles found matching your search.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Pagination Section -->
+<div class="pagination">
+  <a href="#" class="prev-page">Previous</a>
+  <span>Page 1 of 5</span>
+  <a href="#" class="next-page">Next</a>
+</div>

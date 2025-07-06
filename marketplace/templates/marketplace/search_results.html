@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Search Results</h2>
+    {% if vehicles %}
+        <ul>
+            {% for vehicle in vehicles %}
+                <li>{{ vehicle.title }} - {{ vehicle.price }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No vehicles found for your search.</p>
+    {% endif %}
+{% endblock %}
+

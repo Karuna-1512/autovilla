@@ -1,0 +1,470 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoVilla - Marketplace for Cars & Bikes</title>
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'marketplace/css/styles.css' %}">
+<style>
+.logo-text {
+    text-decoration: none;
+    color: #FC6142;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+    /* Global Styles */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #181818;
+      color: #e0e0e0;
+    }
+    /* Header */
+    header {
+      background-color: #252525;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      flex-wrap: wrap;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-left img {
+      height: 40px;
+    }
+    header h1 {
+      font-size: 2rem;
+      color: #FC6142;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #FC6142;
+    }
+    .search-bar {
+      display: flex;
+      margin-top: 10px;
+    }
+    .search-bar input {
+      padding: 8px;
+      border: none;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+    }
+    .search-bar button {
+      padding: 8px;
+      background-color: #FF6347;
+      color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #252525;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 15px 0;
+      }
+      nav ul.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .search-bar {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://via.placeholder.com/1920x600/333333/FFFFFF?text=Ride+The+Future') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    .hero h2 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+    .explore-btn {
+      padding: 15px 30px;
+      background-color: #FC6142;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .explore-btn:hover {
+      background-color: #E55538;
+      transform: translateY(-2px);
+    }
+
+    /* Vehicles Section */
+    .vehicles-list {
+      padding: 40px 20px;
+      background-color: #252525;
+    }
+    .vehicles-list h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #FC6142;
+    }
+    .vehicles-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .vehicle-card {
+      background-color: #303030;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .vehicle-card:hover {
+      transform: translateY(-5px);
+    }
+    .vehicle-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .vehicle-card h3 {
+      margin: 10px 0;
+      font-size: 1.5rem;
+      text-align: center;
+      color: white;
+    }
+    .price {
+      color: #FC6142;
+      font-size: 1.2rem;
+      margin: 10px 0;
+      text-align: center;
+    }
+    .view-details-btn {
+      background-color: #FC6142;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px auto;
+      display: block;
+    }
+    .view-details-btn:hover {
+      background-color: #E55538;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+    }
+    .modal-content {
+      background-color: #202020;
+      margin: 10% auto;
+      padding: 20px;
+      width: 80%;
+      color: white;
+    }
+    .close-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+    }
+    .close-btn:hover {
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #252525;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Social Media Links */
+    .social-links {
+      margin-top: 10px;
+    }
+    .social-icon {
+      color: white;
+      font-size: 20px;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .social-icon:hover {
+      color: #FC6142;
+    }
+
+    /body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+  }
+  h1 {
+      text-align: center;
+      color: #FC6142;
+      margin-top: 30px;
+  }
+  .vehicle-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px 20px;
+  }
+  .vehicle-box {
+      width: 300px;
+      background-color: #1a1a1a;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+      transition: transform 0.3s;
+  }
+  .vehicle-box:hover {
+      transform: scale(1.03);
+  }
+  .vehicle-box img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+  }
+  .vehicle-info {
+      padding: 15px;
+  }
+  .vehicle-info h2 {
+      color: #FC6142;
+      font-size: 20px;
+      margin-bottom: 8px;
+  }
+  .vehicle-info p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #ccc;
+  }
+  .pagination {
+      text-align: center;
+      margin: 30px 0;
+  }
+  .pagination a, .pagination span {
+      color: white;
+      padding: 10px 15px;
+      margin: 0 5px;
+      text-decoration: none;
+      background-color: #FC6142;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+  }
+  .pagination a:hover {
+      background-color: #E55538;
+  }
+  .pagination span {
+      background-color: #333;
+  }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+      <h1 class="logo-text">AutoVilla</h1>
+  </div>
+  
+  
+    <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+    <nav>
+      <ul id="navList">
+        <li><a href="/">Home</a></li>
+        <li><a href="/vehicles">Vehicles</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/profile">Profile</a></li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search for vehicles...">
+      <button class="search-btn">Search</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Find Your Perfect Ride at AutoVilla</h2>
+    <p>Explore our vast collection of bikes and cars waiting for you!</p>
+    <a href="/vehicles" class="explore-btn">Explore Now</a>
+  </section>
+
+  <!-- Vehicles Section -->
+  <section class="vehicles-list">
+    <h2>Featured Vehicles</h2>
+    <div class="vehicle-container">
+      {% for vehicle in vehicles %}
+          <div class="vehicle-box">
+              <img src="{{ vehicle.image.url }}" alt="{{ vehicle.brand }}">
+              <div class="vehicle-info">
+                  <h2>{{ vehicle.title}}</h2>
+                  <p><strong>Fuel Type:</strong> {{ vehicle.fuel_type }}</p>
+                  <p><strong>Price:</strong> ${{ vehicle.price }}</p>
+                
+              </div>
+          </div>
+      {% empty %}
+          <p style="text-align:center;">No vehicles available at the moment.</p>
+      {% endfor %}
+  </div>
+  
+  <div class="pagination">
+      {% if vehicles.has_previous %}
+          <a href="?page={{ vehicles.previous_page_number }}">Previous</a>
+      {% endif %}
+  
+      {% for page_num in vehicles.paginator.page_range %}
+          {% if page_num == vehicles.number %}
+              <span>{{ page_num }}</span>
+          {% else %}
+              <a href="?page={{ page_num }}">{{ page_num }}</a>
+          {% endif %}
+      {% endfor %}
+  
+      {% if vehicles.has_next %}
+          <a href="?page={{ vehicles.next_page_number }}">Next</a>
+      {% endif %}
+  </div>
+  
+
+    <!-- Pagination Section -->
+    <div class="pagination">
+      <a href="#" class="prev-page">Previous</a>
+      <span>Page 1 of 5</span>
+      <a href="#" class="next-page">Next</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 AutoVilla - All rights reserved</p>
+    <div class="social-links">
+      <a href="https://www.facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="vehicleModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3 id="vehicleName"></h3>
+      <p id="vehicleDetails"></p>
+    </div>
+  </div>
+
+  <script>
+    // Menu Toggle for Mobile
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('navList').classList.toggle('show');
+    });
+
+    // Live Search Functionality
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+      const filter = this.value.toLowerCase().trim();
+      if (filter === "") {
+        document.querySelectorAll('.vehicle-card').forEach(card => {
+          card.style.display = 'block';
+        });
+        return;
+      }
+      document.querySelectorAll('.vehicle-card').forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = title.includes(filter) ? '' : 'none';
+      });
+    });
+
+    // Modal Functionality
+    function openModal(vehicleId) {
+      const modal = document.getElementById('vehicleModal');
+      const vehicleName = document.getElementById('vehicleName');
+      const vehicleDetails = document.getElementById('vehicleDetails');
+
+      // Fetch vehicle details using vehicleId (you would replace this with an actual API request or data)
+      vehicleName.textContent = 'Vehicle Name ' + vehicleId;
+      vehicleDetails.textContent = 'Detailed information about vehicle ' + vehicleId;
+
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('vehicleModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

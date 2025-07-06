@@ -1,0 +1,93 @@
+{% extends 'marketplace/base.html' %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #fff8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .vehicle-detail-card {
+    max-width: 750px;
+    margin: 40px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(212, 76, 49, 0.3);
+    transition: transform 0.3s ease;
+    background: white;
+    border: 1px solid #f5d5cf;
+  }
+
+  .vehicle-detail-card:hover {
+    transform: scale(1.015);
+    box-shadow: 0 12px 30px rgba(212, 76, 49, 0.4);
+  }
+
+  .vehicle-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+  }
+
+  .vehicle-info {
+    padding: 25px;
+    color: #333;
+  }
+
+  .vehicle-info h2 {
+    color: #d44c31;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .vehicle-info p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .vehicle-info p span {
+    color: #d44c31;
+    font-weight: 600;
+  }
+
+  .btn-red-orange {
+    display: inline-block;
+    margin-top: 20px;
+    background: #d44c31;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background 0.3s;
+    text-decoration: none;
+  }
+
+  .btn-red-orange:hover {
+    background: #b03d28;
+  }
+
+  .icon {
+    margin-right: 8px;
+    color: #d44c31;
+  }
+</style>
+
+<div class="vehicle-detail-card">
+  <img src="{{ vehicle.image.url }}" alt="{{ vehicle.title }}" class="vehicle-image">
+  <div class="vehicle-info">
+    <h2><i ></i>{{ vehicle.title }}</h2>
+    <p><i class="icon fas fa-certificate"></i><span>Brand:</span> {{ vehicle.brand }}</p>
+    <p><i class="icon fas fa-cogs"></i><span>Model:</span> {{ vehicle.model_name }}</p>
+    <p><i class="icon fas fa-rupee-sign"></i><span>Price:</span> ₹{{ vehicle.price }}</p>
+    <p><i class="icon fas fa-info-circle"></i><span>Description:</span> {{ vehicle.description }}</p>
+    <div class="text-center">
+      <a href="{% url 'vehicles' %}" class="btn-red-orange"><i class="fas fa-arrow-left"></i> Back to Vehicles</a>
+    </div>
+  </div>
+</div>
+
+<!-- Font Awesome for icons (if not already included in base.html) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+{% endblock %}

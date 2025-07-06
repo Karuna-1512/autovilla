@@ -1,0 +1,80 @@
+{% extends 'marketplace/base.html' %}
+
+{% block content %}
+<div class="bg-gray-100 dark:bg-gray-900 min-h-screen py-10 px-4 sm:px-8 text-gray-800 dark:text-gray-200">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Greeting Section -->
+    <header class="mb-8 text-center">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Welcome Back, {{ request.user.username }} 👋</h1>
+      <p class="text-sm text-gray-600 dark:text-gray-400">We are happy to have you back. Let’s explore your dashboard!</p>
+    </header>
+
+    <!-- Statistics Cards (with Icons) -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-car text-4xl text-green-600 mb-4"></i>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Total Vehicles</h2>
+        <p class="text-3xl font-bold text-green-600 mt-2">{{ total_vehicles }}</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-car-side text-4xl text-blue-600 mb-4"></i>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Cars</h2>
+        <p class="text-3xl font-bold text-blue-600 mt-2">{{ total_cars }}</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-motorcycle text-4xl text-red-600 mb-4"></i>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Bikes</h2>
+        <p class="text-3xl font-bold text-red-600 mt-2">{{ total_bikes }}</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-list-ul text-4xl text-indigo-600 mb-4"></i>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">My Listings</h2>
+        {% comment %} <a href="{% url 'my_listings' %}" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-sm">View Listings</a> {% endcomment %}
+      </div>
+    </section>
+
+    <!-- Quick Actions Section (with Icons) -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-plus-circle text-3xl text-green-600 mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Add a New Vehicle</h3>
+        <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Quickly list your vehicle (car/bike) for sale or rent.</p>
+        <a href="{% url 'add_vehicle' %}" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Add Vehicle</a>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-user-edit text-3xl text-blue-600 mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Edit Profile</h3>
+        <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Update your personal details to keep everything up to date.</p>
+        <a href="{% url 'edit_profile' %}" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">Edit Profile</a>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+        <i class="fas fa-sign-out-alt text-3xl text-red-600 mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Logout</h3>
+        <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Securely log out of your account.</p>
+        <a href="{% url 'logout' %}" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg">Logout</a>
+      </div>
+    </section>
+
+    <!-- Recent Activity Section (with Icons) -->
+    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Recent Activity</h3>
+      {% if recent_activities %}
+        <ul class="text-sm space-y-2 text-gray-700 dark:text-gray-300">
+          {% for activity in recent_activities %}
+            <li class="flex items-center space-x-2">
+              <i class="fas fa-check-circle text-green-500"></i>
+              <span>{{ activity }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-gray-500 dark:text-gray-400 text-sm">No recent activities to show.</p>
+      {% endif %}
+    </section>
+
+  </div>
+</div>
+{% endblock %}

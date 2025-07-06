@@ -1,0 +1,109 @@
+{%load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AutoVilla - Marketplace for Cars & Bikes</title>
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'marketplace/css/styles.css' %}">
+        <style>
+            /* General styles for the body */
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: #121212; /* Dark background */
+                color: #f1f1f1; /* Light text color */
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Navbar styles */
+            nav {
+                width: 100%;
+                position: fixed; /* Fixed position for sticky navbar */
+                top: 0;
+                left: 0;
+                z-index: 1000; /* Ensure it stays above other content */
+            }
+
+            /* Navbar links style */
+            nav ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Distribute space between logo and nav links */
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #feb47b;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar links container */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Space between the links */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar links style */
+.nav-links a {
+    color: #f1f1f1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect on links */
+.nav-links a:hover {
+    color: #ff7e5f; /* Hover color */
+}
+
+/* Active link styling */
+.nav-links a.active {
+    color: #feb47b; /* Active link color */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 20px; /* Adjust gap between links on smaller screens */
+    }
+}
+        </style>
+    </head>
+    <body>
+        <!-- Navigation bar -->
+<nav>
+    <ul>
+        <header class="navbar">
+            <div class="logo">AutoVilla</div>
+            <li><a href="/" {% if request.path == '/' %}class="active"{% endif %}>Home</a></li>
+            <li><a href="/vehicles" {% if request.path == '/vehicles' %}class="active"{% endif %}>Vehicles</a></li>
+            <li><a href="/about" {% if request.path == '/about' %}class="active"{% endif %}>About Us</a></li>
+            <li><a href="/contact" {% if request.path == '/contact' %}class="active"{% endif %}>Contact</a></li>
+            <li><a href="/login" {% if request.path == '/login' %}class="active"{% endif %}>Login</a></li>
+        </header>
+    </ul>
+</nav>
+</body>
+</html>

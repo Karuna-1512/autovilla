@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us - AutoVilla</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .logo-text {
+            text-decoration: justify;
+            color: #FC6142;
+            font-family: 'Poppins', sans-serif;
+            margin-left: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        header {
+            background-color: #252525;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            flex-wrap: wrap;
+          }
+          .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+          .header-left img {
+            height: 40px;
+          }
+          header h1 {
+            font-size: 2rem;
+            color: #FC6142;
+          }
+          nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+          }
+          nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+          }
+          nav ul li a:hover {
+            color: #FC6142;
+          }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #181818;
+            color: #e0e0e0;
+        }
+
+        header {
+            width: 100%;
+            background: #121212;
+            padding: 15px 0;
+            position: relative;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .page-content {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .contact-box {
+            max-width: 800px;
+            background-color: #252525;
+            padding: 45px 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ddd;
+            margin-bottom: 18px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #e74c3c;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            background: #303030;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #bbb;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(to right, #ff512f, #dd2476);
+            color: white;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #dd2476, #ff512f);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transform: scale(1.03);
+        }
+
+        a.home-link {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 22px;
+            background: linear-gradient(to right, #ff512f, #dd2476);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        a.home-link:hover {
+            background: linear-gradient(to right, #dd2476, #ff512f);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 28px; }
+            p { font-size: 16px; }
+            .contact-box { padding: 30px 20px; }
+            nav ul { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <header>
+        <h1 class="logo-text">
+            AutoVilla
+        </h1>
+    </div>
+      <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+      <nav>
+        <ul id="navList">
+          <li><a href="/">Home</a></li>
+          <li><a href="/vehicles">Vehicles</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+          {% else %}
+            <li><a href="/register">Register</a></li>
+          {% endif %}
+          <li><a href="/profile">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Centered Page Content -->
+    <div class="page-content">
+        <div class="contact-box">
+            <h1>Contact Us</h1>
+
+            <p><span class="info-label">Email:</span> contact@autovilla.com</p>
+            <p><span class="info-label">Phone:</span> +1-234-567-890</p>
+            <p><span class="info-label">Address:</span> 123 AutoVilla Lane, Car City, CA 12345</p>
+
+            <p>If you have any questions or inquiries, feel free to reach out to us anytime. Our dedicated team is here to assist you with any concerns you may have.</p>
+            
+            <p>At AutoVilla, we understand that buying or selling a vehicle can be a significant decision. That's why we strive to provide you with all the necessary information and support to make the process as smooth as possible.</p>
+
+            <form id="contactForm">
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                <input type="submit" value="Send Message">
+            </form>
+
+            <p>Thank you for choosing <strong>AutoVilla</strong> — where great deals meet trusted service! We value your feedback and are always looking for ways to improve our services. Don't hesitate to reach out with your thoughts or suggestions.</p>
+
+            <p>Whether you are a first-time buyer or a seasoned seller, we are committed to providing you with a seamless experience. Our team is passionate about helping you find the right vehicle that fits your lifestyle and budget.</p>
+
+            <a href="/" class="home-link">Back to Homepage</a>
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if(name && email && message) {
+                alert(`Thank you, ${name}! Your message has been sent successfully!`);
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Please fill out all fields before sending your message.');
+            }
+        });
+    </script>
+</body>
+</html>
