@@ -98,8 +98,6 @@ python manage.py runserver
 
 **Karuna**
 B.Tech CSE (AI & ML), Malla Reddy University
-📧 [karuna@example.com](mailto:karuna@example.com)
-
 ---
 
 
@@ -107,6 +105,6 @@ B.Tech CSE (AI & ML), Malla Reddy University
 
 If you like this project, consider giving it a ⭐ on GitHub!
 
-```
+
 
 
